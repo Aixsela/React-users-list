@@ -1,9 +1,12 @@
-.App {
+.app {
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
+.bg {
+  background: radial-gradient(circle, rgba(85,200,255,1) 0%, rgba(156,169,255,1) 50%, rgba(226,140,255,1) 100%);
+}
+
+.app-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,21 +16,27 @@
   color: white;
 }
 
-.form-group {
-  width: 60vw;
-  padding: 20px;
-  border: 1px solid gray;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-
+.card:hover {
+  transition: .3s;
+  background-color: hsla(240, 56%, 30%, 0.703);
+  color: white;
+  transform: scale(1.1);
 }
 
+.link {
+  text-decoration: none;
+}
 
+.detail-user {
+  height:100vh;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
 
-
-.card:hover {
-  background-color: rgb(34, 34, 119);
-  color: white;
+.glass-card {
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.27);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
