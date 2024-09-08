@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardUser from './components/card/CardUser';
 
-function App() {
+
+export default function App() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -19,13 +20,11 @@ function App() {
     if (! users.length) return;
   
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="app">
+        <header className="app-header bg">
           <h1>Utenti</h1>
           <CardUser user={users} />
         </header>
       </div>
     );
 }
-
-export default App;
