@@ -6,6 +6,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 
+
 export default function CardUser(props) {
   const formatter = new Intl.DateTimeFormat('it-IT', {
     day: '2-digit',
@@ -18,22 +19,21 @@ export default function CardUser(props) {
         {
           props.user.length > 0 ? ( 
           props.user.map(user => (
-            <Link key={user.id} to={`/user-details/${user.id}`}>
-              <Card sx={{ minWidth: 400 }} className='card' key={user.id}>
-                
-                    <CardActionArea>
-                      <CardContent sx={{ display: 'flex', justifyContent: 'space-between', textTransform: 'capitalize'}}>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {user.name} {user.surname}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {formatter.format(new Date(user.updated_at))}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-        
+            <Link key={user.id} to={`/user-details/${user.id}`} className='link'>
+              <Card sx={{ minWidth: 400, boxShadow: 3 }} className='card' >
+                <CardActionArea>
+                  <CardContent sx={{display: 'flex', justifyContent: 'space-between', textTransform: 'capitalize'}}>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {user.name} {user.surname}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div"> 
+                      Aggiornato: 
+                      {formatter.format(new Date(user.updated_at))}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
               </Card>
-              </Link>
+            </Link>
           ))) : <span>Non ci sono utenti</span>
         }
     </Stack>     
