@@ -22,8 +22,12 @@ export default function UserDetail() {
         year: 'numeric'
       })
 
+      
+    Notification.requestPermission()
+
+
     useEffect(() => {
-        axios.get(`https://api-test.tabuiapp.it/api/second-test-crud/${id}`)
+        axios.get(`http://localhost:3000/users/${id}`)
         .then(response => {
             setUserDetails(response.data);
         })
@@ -36,11 +40,14 @@ export default function UserDetail() {
     if (! Object.keys(userDetails).length) return;
 
     const handleUpdate = () => {
-        const {id, name, surname, email } = userDetails;
-        const dataToSave = {id, name, surname, email }
-        axios.post(`https://api-test.tabuiapp.it/api/second-test-crud`, dataToSave)
+        const { id, name, surname, email } = userDetails;
+        const dataToSave = { id, name, surname, email, updated_at : new Date() }
+
+        axios.patch(`http://localhost:3000/users/${userDetails.id}`, dataToSave)
         .then(response => {
             setUserDetails(response.data);
+            navigate('/');
+            new Notification("Utente aggiornato con successo!")
         })
         .catch(error => {
             console.error('Errore nella richiesta API:', error);
@@ -49,7 +56,7 @@ export default function UserDetail() {
 
     const handleDelete = () => {
         navigate('/');
-        axios.delete(`https://api-test.tabuiapp.it/api/second-test-crud/${userDetails.id}`)
+        axios.delete(`http://localhost:3000/users/${userDetails.id}`)
         .then(response => {
             console.log(response);
             navigate('/');
@@ -90,6 +97,7 @@ export default function UserDetail() {
                     label="Nome"
                     required
                     defaultValue={userDetails.name}
+                    onChange={(e)=>userDetails.name = e.target.value}
                     variant="standard"
                     sx={{width:"15vw"}}
                 />
@@ -98,6 +106,7 @@ export default function UserDetail() {
                     label="Cognome"
                     required
                     defaultValue={userDetails.surname}
+                    onChange={(e)=>userDetails.surname = e.target.value}
                     variant="standard"
                     sx={{width:"15vw"}}
                 />
@@ -114,6 +123,7 @@ export default function UserDetail() {
                     label="Email"
                     required
                     defaultValue={userDetails.email}
+                    onChange={(e)=>userDetails.email = e.target.value}
                     variant="standard"
                     sx={{width:"32vw"}}
                 />
@@ -158,7 +168,7 @@ export default function UserDetail() {
                     <ArrowBackIcon />
                 </IconButton>
                 <div>
-                    <IconButton aria-label="delete" color="primary" onClick={handleUpdate} >
+                    <IconButton aria-label="delete" color="primary" onClick={handleUpdate}>
                         <UpgradeIcon fontSize="medium" />
                     </IconButton>
                     <IconButton aria-label="delete" color="error" onClick={handleDelete}>
