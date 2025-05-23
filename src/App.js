@@ -8,7 +8,7 @@ export default function App() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('https://api-test.tabuiapp.it/api/second-test-crud')
+        axios.get('http://localhost:3000/users')
         .then(response => {
             setUsers(response.data);
         })
